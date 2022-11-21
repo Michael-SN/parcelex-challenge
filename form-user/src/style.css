@@ -3,21 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#d3e9fc] flex justify-center items-center;
-}
-
-.card-info-container {
-  @apply mb-8 w-full rounded-xl bg-center p-8;
-  height: 330px;
-  background-image: url("https://images.unsplash.com/photo-1614854262340-ab1ca7d079c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-}
-
-.card-info {
-  @apply h-full w-full rounded-3xl bg-white bg-opacity-10 p-8;
-  @apply border border-white text-white;
-}
-
-.form-input {
-  @apply rounded-lg border border-gray-400 px-4 py-3 transition-colors;
-  @apply focus:border focus:border-violet-500 focus:outline-0;
+  @apply bg-[#d3e9fc];
 }

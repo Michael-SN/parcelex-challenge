@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "SubmitButton",
+  name: "AtomButton",
   props: ['btnText']
 }
 </script>
