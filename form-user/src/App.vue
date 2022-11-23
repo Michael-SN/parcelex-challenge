@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TemplateFormUser from './components/templates/TemplateFormUser.vue';
+import TemplateFormUser from '@/templates/TemplateFormUser.vue';
 
 
 export default {
