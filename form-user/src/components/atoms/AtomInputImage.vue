@@ -5,7 +5,7 @@
       <figcaption
         class="absolute left-0 right-0 bottom-0 bg-violet-600 text-center text-xs text-white antialiased font-semibold pb-4 pt-2">
         <label for="imageUser" class="cursor-pointer">Change Image</label>
-        <input type="file" name="use_img" id="imageUser" @change="changeImage" class="hidden" />
+        <input type="file" name="use_img" id="imageUser" @change="previewImage" accept="image/*" class="hidden" />
       </figcaption>
     </figure>
   </div>
@@ -21,11 +21,17 @@ export default {
     }
   },
   methods: {
-    changeImage(e) {
-      const file = e.target.files[0]
-      this.image = URL.createObjectURL(file)
+    previewImage(e) {
+      const file = e.target.files
 
-      console.log(file)
+      if (file && file[0]) {
+        let reader = new FileReader()
+        reader.onload = e => {
+          this.image = e.target.result
+        }
+        reader.readAsDataURL(file[0])
+      }
+      this.$emit('update:image', file[0])
     }
   },
 }
