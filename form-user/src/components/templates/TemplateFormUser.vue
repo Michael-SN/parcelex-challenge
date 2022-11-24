@@ -22,7 +22,7 @@
         </MoleculeFormGroup>
 
         <MoleculeFormGroup legend="Age:" for-input="dataUserBirth">
-          <AtomInputText type-input="text" name-input="user_birthdate" id="dataUserBirth" required="false"
+          <AtomInputText type-input="date" name-input="user_birthdate" id="dataUserBirth" required="false"
             @update:value="user.age = $event" />
         </MoleculeFormGroup>
       </div>
