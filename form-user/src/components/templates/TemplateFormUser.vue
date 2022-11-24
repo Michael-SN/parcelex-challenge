@@ -2,9 +2,9 @@
   <section class="mx-auto mt-12 w-full sm:w-[600px] rounded-xl border bg-white border-gray-100 p-8 shadow-lg">
     <AtomTitle tag="h2" content="Create your account" />
 
-    <OrganismForm form-action="" id="formUser" method="POST">
+    <OrganismForm id="formUser" method="POST" @submit.prevent="submit">
       <MoleculeFormGroup>
-        <AtomInputImage @update:image="user.profileImage = $event" />
+        <AtomInputImage @update:image="getTheImage($event)" />
       </MoleculeFormGroup>
       <MoleculeFormGroup legend="Name" for-input="txtName">
         <AtomInputText type-input="text" name-input="user_name" id="txtName" required="true"
@@ -26,11 +26,11 @@
             @update:value="user.age = $event" />
         </MoleculeFormGroup>
       </div>
-      <AtomButton>
+      <AtomButton typed="submit">
         Submit
       </AtomButton>
-
     </OrganismForm>
+    <OrganismsFeedback v-if="successForm" :user="user" />
   </section>
 </template>
 
@@ -40,6 +40,7 @@ import AtomButton from '@/atoms/AtomButton.vue';
 import AtomInputText from '@/atoms/AtomInputText.vue';
 import AtomTitle from '@/atoms/AtomTitle.vue';
 import OrganismForm from '@/organisms/OrganismForm.vue';
+import OrganismsFeedback from '@/organisms/OrganismsFeedback.vue';
 import AtomInputImage from '@/atoms/AtomInputImage.vue';
 
 export default {
@@ -47,17 +48,36 @@ export default {
   data() {
     return {
       user: {
-        name: 'SN',
-        email: 'teste@teste.com',
-        age: '100',
-        telephone: '(##) #####-####',
+        name: '',
+        email: '',
+        age: '',
+        telephone: '',
         profileImage: {}
-      }
+      },
+      successForm: false
     }
   },
   methods: {
-    // 
+    getTheImage(e) {
+      let { name, size } = e
+      this.user.profileImage = { fileName: name, sizeImage: size }
+    },
+    checkForm({ name, email }) {
+      return (name.length && email.length) ? true : false
+    },
+    submit() {
+      try {
+        let formChecked = this.checkForm(this.user)
+        if (formChecked) {
+          setTimeout(() => {
+            this.successForm = true
+          }, 1000)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   },
-  components: { MoleculeFormGroup, AtomButton, AtomInputText, AtomTitle, OrganismForm, AtomInputImage }
+  components: { MoleculeFormGroup, AtomButton, AtomInputText, AtomTitle, OrganismForm, OrganismsFeedback, AtomInputImage }
 }
 </script>
