@@ -6,22 +6,22 @@
       <MoleculeFormGroup>
         <AtomInputImage @update:image="getTheImage($event)" />
       </MoleculeFormGroup>
-      <MoleculeFormGroup legend="Name" for-input="txtName">
+      <MoleculeFormGroup legend="Name:" for-input="txtName">
         <AtomInputText type-input="text" name-input="user_name" id="txtName" required="true"
           @update:value="user.name = $event" />
       </MoleculeFormGroup>
 
-      <MoleculeFormGroup legend="E-mail" for-input="txtEmail">
+      <MoleculeFormGroup legend="E-mail:" for-input="txtEmail">
         <AtomInputText type-input="email" name-input="user_email" id="txtEmail" required="true"
           @update:value="user.email = $event" />
       </MoleculeFormGroup>
       <div class="grid grid-cols-2 gap-4">
-        <MoleculeFormGroup legend="Telephone" for-input="txtTelephone">
-          <AtomInputText type-input="text" name-input="user_telephone" id="txtTelephone" required="true"
-            @update:value="user.telephone = $event" />
+        <MoleculeFormGroup legend="Phone Number:" for-input="txtTelephone">
+          <AtomInputText type-input="tel" v-mask="['(##) ####-####', '(##) #####-####']" name-input="user_telephone"
+            id="txtTelephone" required="true" @update:value="user.phone = $event" />
         </MoleculeFormGroup>
 
-        <MoleculeFormGroup legend="Age" for-input="dataUserBirth">
+        <MoleculeFormGroup legend="Age:" for-input="dataUserBirth">
           <AtomInputText type-input="text" name-input="user_birthdate" id="dataUserBirth" required="false"
             @update:value="user.age = $event" />
         </MoleculeFormGroup>
@@ -42,6 +42,7 @@ import AtomTitle from '@/atoms/AtomTitle.vue';
 import OrganismForm from '@/organisms/OrganismForm.vue';
 import OrganismsFeedback from '@/organisms/OrganismsFeedback.vue';
 import AtomInputImage from '@/atoms/AtomInputImage.vue';
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'TemplateFormUser',
@@ -51,7 +52,7 @@ export default {
         name: '',
         email: '',
         age: '',
-        telephone: '',
+        phone: '',
         profileImage: {}
       },
       successForm: false
@@ -78,6 +79,7 @@ export default {
       }
     }
   },
+  directives: { mask },
   components: { MoleculeFormGroup, AtomButton, AtomInputText, AtomTitle, OrganismForm, OrganismsFeedback, AtomInputImage }
 }
 </script>
